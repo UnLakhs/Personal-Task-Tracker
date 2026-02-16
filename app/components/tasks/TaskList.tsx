@@ -1,4 +1,5 @@
 import { Task } from "@/app/constants/types";
+import ToggleTask from "./ToggleTask";
 
 const getTasks = async () => {
   try {
@@ -21,7 +22,15 @@ const TaskList = async () => {
       <ul>
         {tasks && tasks.length > 0
           ? tasks.map((task: Task) => (
-              <li className="text-2xl" key={task._id.toString()}>{task.title}</li>
+              <li className="text-2xl" key={task._id.toString()}>
+                <div>
+                  <ToggleTask
+                    id={task._id.toString()}
+                    completed={task.status === "completed"}
+                  />
+                  <span className={task.status === "completed" ? "line-through opacity-50" : ""}>{task.title}</span>
+                </div>
+              </li>
             ))
           : null}
       </ul>
