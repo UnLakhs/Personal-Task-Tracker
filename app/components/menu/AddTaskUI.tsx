@@ -1,7 +1,9 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const AddTaskUI = () => {
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -21,7 +23,7 @@ const AddTaskUI = () => {
       if (!response.ok) {
         throw new Error("Failed to add task");
       }
-
+      router.refresh(); 
       //   setTitle("");
     } catch (error) {
       console.error("Error adding task:", error);
