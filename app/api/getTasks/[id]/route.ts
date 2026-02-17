@@ -13,7 +13,7 @@ export async function PATCH(
     const db = client.db("Personal-Task-Tracker");
     const taskCollection = db.collection<Task>("tasks");
 
-    const {id} = await params;
+    const { id } = await params;
 
     if (!ObjectId.isValid(id)) {
       return NextResponse.json({ message: "Invalid task ID" }, { status: 400 });
@@ -38,6 +38,34 @@ export async function PATCH(
     );
   } catch (error) {
     console.error("Error toggling task status:", error);
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 },
+    );
+  }
+}
+
+//Deletes a task
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  const { id } = await params;
+  const client = await clientPromise;
+  const db = client.db("Personal-Task-Tracker");
+  const taskCollection = db.collection<Task>("tasks");
+
+  try {
+    const result = await taskCollection.deleteOne({ _id: new ObjectId(id) });
+    if (!result)
+      return NextResponse.json({ message: "Task not found" }, { status: 404 });
+
+    return NextResponse.json(
+      { message: "Task deleted successfully" },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error("Error deleting task:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
       { status: 500 },
