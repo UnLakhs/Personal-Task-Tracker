@@ -8,6 +8,9 @@
     --card-foreground: 220 20% 14%;
     --progress-track: 0 0 0;
     --primary: 174 60% 42%;
+    --primary-foreground: 0 0% 100%;
+    --border: 36 15% 88%;
+    --ring: 174 60% 42%;
   }
 }
 
@@ -18,4 +21,7 @@
   --color-card-foreground: hsl(var(--card-foreground));
   --color-progress-track: hsl(var(--progress-track));
   --color-primary: hsl(var(--primary));
+  --color-border: hsl(var(--border));
+  --color-ring: hsl(var(--ring));
+  --color-primary-foreground: hsl(var(--primary-foreground));
 }

@@ -19,7 +19,7 @@ const TaskList = async () => {
   const tasks = await getTasks();
 
   return (
-    <div className="bg-[#27F5F5] rounded-2xl p-4 w-100">
+    <div className="rounded-2xl p-4 w-100">
       <ul>
         {tasks && tasks.length > 0
           ? tasks.map((task: Task) => (

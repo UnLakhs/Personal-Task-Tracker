@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Plus } from "lucide-react";
 
 const AddTaskUI = () => {
   const router = useRouter();
@@ -23,7 +24,7 @@ const AddTaskUI = () => {
       if (!response.ok) {
         throw new Error("Failed to add task");
       }
-      router.refresh(); 
+      router.refresh();
       //   setTitle("");
     } catch (error) {
       console.error("Error adding task:", error);
@@ -33,21 +34,21 @@ const AddTaskUI = () => {
   };
 
   return (
-    <div className="bg-[#27F5F5] rounded-2xl p-4 flex flex-row items-center justify-between w-100">
+    <div className="mt-4 bg-card rounded-2xl p-2 flex flex-row items-center justify-between w-full border border-border gap-2 shadow-sm focus-within:ring-2 focus-within:ring-ring/30 transition-duration-200 transition-shadow">
       <form onSubmit={handleSubmit} className="flex justify-between w-full">
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Enter task title"
-          className="border-2 p-2 w-64 rounded bg-[#20E6E6] text-black"
+          placeholder="Add new task..."
+          className="bg-transparent text-sm text-foreground w-full focus:outline-none flex-1"
         />
         <button
           type="submit"
-          disabled={loading}
-          className="bg-blue-500 text-white p-2 rounded cursor-pointer"
+          disabled={loading || !title.trim()}
+          className="cursor-pointer hover:opacity-90 transition transition-duration-200 bg-primary text-primary-foreground p-1.5 rounded-md disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {loading ? "Adding..." : "Add Task"}
+          <Plus className="w-4 h-4  "/>
         </button>
       </form>
     </div>
