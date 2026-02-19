@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { Trash2 } from "lucide-react";
 
 const DeleteTask = ({ id }: { id: string }) => {
   const router = useRouter();
@@ -24,8 +25,11 @@ const DeleteTask = ({ id }: { id: string }) => {
   };
 
   return (
-    <button onClick={handleDelete} className="cursor-pointer text-red-500">
-      
+    <button
+      onClick={handleDelete}
+      className="cursor-pointer opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-all"
+    >
+      <Trash2 size={20} />
     </button>
   );
 };

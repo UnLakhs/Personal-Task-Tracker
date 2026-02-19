@@ -19,17 +19,26 @@ const TaskList = async () => {
   const tasks = await getTasks();
 
   return (
-    <div className="rounded-2xl p-4 w-100">
+    <div className="rounded-2xl p-4">
       <ul>
         {tasks && tasks.length > 0
           ? tasks.map((task: Task) => (
-              <li className="text-2xl flex justify-between w-64" key={task._id.toString()}>
-                <div>
+              <li className="group text-sm py-3 px-4 w-full mb-2 border border-border rounded-lg bg-card" key={task._id.toString()}>
+                <div className="flex items-center justify-center gap-2">
                   <ToggleTask
                     id={task._id.toString()}
                     completed={task.status === "completed"}
                   />
-                  <span className={task.status === "completed" ? "line-through opacity-50" : ""}>{task.title}</span>
+                  <span 
+                    className={`
+                      flex-1 
+                      wrap-break-word 
+                      overflow-hidden
+                      ${task.status === "completed" ? "line-through opacity-50" : ""}
+                    `}
+                  >
+                    {task.title}
+                  </span>
                   <DeleteTask id={task._id.toString()} />
                 </div>
               </li>
